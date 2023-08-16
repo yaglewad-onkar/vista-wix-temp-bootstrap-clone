@@ -72,23 +72,25 @@
 
   <script>
     let isNavbarFixed = true;
-    let lastScrollPos = 0;
+    let scrollCounter = 0;
 
     function handleScroll() {
       const currentScrollPos = window.pageYOffset;
-      const scrollDifference = Math.abs(currentScrollPos - lastScrollPos);
 
-      if (scrollDifference > 50) {
-        if (currentScrollPos > lastScrollPos) {
-          isNavbarFixed = false;
-          document.querySelector(".navbar").style.top = "-100px";
-        } else {
-          isNavbarFixed = true;
-          document.querySelector(".navbar").style.top = "0";
-        }
+      if (scrollCounter < 2 && currentScrollPos > 0) {
+        // Keep the navbar fixed for a few scrolls
+        isNavbarFixed = true;
+        scrollCounter++;
+      } else {
+        isNavbarFixed = false;
+        scrollCounter = 0;
       }
 
-      lastScrollPos = currentScrollPos;
+      if (isNavbarFixed) {
+        document.querySelector(".navbar").style.top = "0";
+      } else {
+        document.querySelector(".navbar").style.top = "-100px";
+      }
     }
 
     window.addEventListener("scroll", handleScroll);
