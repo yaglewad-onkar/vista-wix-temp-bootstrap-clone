@@ -8,17 +8,27 @@
     body {
       margin: 0;
       padding: 0;
+      background-color: black;
+      color: white;
+      font-size: 20px;
+    }
+
+    .navbar {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      background-color: #343a40; /* Black BG */
+      z-index: 1000; 
     }
 
     .home-page {
-      background-color: black;
-      color: white;
       display: flex;
       flex-direction: column;
       align-items: flex-start;
       justify-content: center;
       height: 100vh;
       padding-left: 20px;
+      padding-top: 60px; 
     }
 
     .title {
@@ -32,12 +42,18 @@
   </style>
 </head>
 <body>
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <!-- Navbar content -->
+  </nav>
+
   <div class="home-page">
-    <div class="title">
-      The New Standard
-    </div>
-    <div class="subtitle">
-      in Data Analysis
+    <div>
+      <div class="title">
+        The New Standard
+      </div>
+      <div class="subtitle">
+        in Data Analysis
+      </div>
     </div>
   </div>
 </body>
