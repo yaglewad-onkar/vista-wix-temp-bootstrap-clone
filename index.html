@@ -17,27 +17,42 @@
     }
   </style>
   <script>
-    function loadPage(pageName) {
-      document.getElementById('page-content').innerHTML = '';
+function loadPage(pageName) {
+  document.getElementById('page-content').innerHTML = '';
 
-      fetch(`${pageName.toLowerCase()}.html`)
-        .then(response => response.text())
-        .then(content => {
-          document.getElementById('page-content').innerHTML = content;
-        })
-        .catch(error => {
-          console.error('Error loading page:', error);
-        });
-    }
+  if (pageName === 'Home') {
+    // Load home content using fetch
+    fetch('home.html')  // Load content from home.html
+      .then(response => response.text())
+      .then(content => {
+        document.getElementById('page-content').innerHTML = content;
+      })
+      .catch(error => {
+        console.error('Error loading page:', error);
+      });
+  } else {
+    // Load other pages using fetch
+    fetch(`${pageName.toLowerCase()}.html`)
+      .then(response => response.text())
+      .then(content => {
+        document.getElementById('page-content').innerHTML = content;
+      })
+      .catch(error => {
+        console.error('Error loading page:', error);
+      });
+  }
+}
+
   </script>
 </head>
 <body>
+    <!-- Navbar -->
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="container">
-      <a class="navbar-brand" href="#">
-        <img src="inc/icon.png" alt="Icon" width="30" height="30" class="d-inline-block align-text-top">
-        Vista.io Navbar
-      </a>
+        <a class="navbar-brand" href="#" onclick="loadPage('Home');">
+            <img src="inc/icon.png" alt="Icon" width="30" height="30" class="d-inline-block align-text-top">
+            Vista.io Navbar
+        </a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -56,10 +71,10 @@
             <a class="nav-link" href="#" onclick="loadPage('Blog');">Blog</a>
           </li>
           <li class="nav-item">
-            <button class="btn btn-outline-light">
-              <img src="inc/profile-icon.png" alt="Profile Icon" width="20" height="20">
+            <a class="nav-link d-flex align-items-center" href="#">
+              <img src="inc/profile-icon.png" alt="Profile Icon" width="20" height="20" class="me-2">
               Login
-            </button>
+            </a>
           </li>
           <li class="nav-item">
             <button class="btn btn-primary">Get Started</button>
