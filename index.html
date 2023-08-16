@@ -76,14 +76,16 @@
 
     function handleScroll() {
       const currentScrollPos = window.pageYOffset;
+      const scrollDirection = currentScrollPos > lastScrollPos ? 'down' : 'up';
 
-      if (scrollCounter < 2 && currentScrollPos > 0) {
-        // Keep the navbar fixed for a few scrolls
-        isNavbarFixed = true;
+      if (scrollDirection === 'down') {
         scrollCounter++;
+        if (scrollCounter >= 2) {
+          isNavbarFixed = false;
+        }
       } else {
-        isNavbarFixed = false;
         scrollCounter = 0;
+        isNavbarFixed = true;
       }
 
       if (isNavbarFixed) {
@@ -91,8 +93,11 @@
       } else {
         document.querySelector(".navbar").style.top = "-100px";
       }
+
+      lastScrollPos = currentScrollPos;
     }
 
+    let lastScrollPos = window.pageYOffset;
     window.addEventListener("scroll", handleScroll);
   </script>
 
